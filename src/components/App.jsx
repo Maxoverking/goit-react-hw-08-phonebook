@@ -1,16 +1,77 @@
+// import { addNewContactsAction,deleteContactsAction } from "./redux/slice";
+import { Container } from "./App.styled";
+import { ProgressBar } from 'react-loader-spinner';
+import { STATUS } from "./Status/costants.status";
+import  Form  from "./Form";
+import  Contacts  from "./Contacts";
+import Filter from "./Filter";
+import WrapperForPhonebook  from "./Wrapper";
+import { useEffect } from "react";
+import { useDispatch,useSelector } from 'react-redux';
+import { addNewContacts, getFilteredContacts, isLoadingContacts } from "../redux/selectors";
+import { getContacts,addContacts,deleteContacts } from "../redux/operations";
+
+
 export const App = () => {
+  const dispatch = useDispatch();
+  const items = useSelector(addNewContacts);
+  const isLoading = useSelector(isLoadingContacts);
+  const filter = useSelector(getFilteredContacts);
+
+  useEffect(() => {
+    dispatch(getContacts())
+  },[dispatch])
+
+  const getFormData = newContact => {
+  if (items.length === 0) {
+    dispatch(addContacts(newContact));
+    return;
+    } else {
+      const existingContacts = 
+      items.findIndex(itemContacts =>
+        newContact.name === itemContacts.name) !==-1;
+        // Проверка если контакт уже есть
+        // console.log("🚀  existingContacts", existingContacts);
+    if(existingContacts){
+      alert(`${newContact.name} is already in contacts.`)
+      return;
+    }
+    dispatch(addContacts(newContact));
+    }
+  }
+  const deleteContact = uniqueId => {
+    // console.log("🚀  uniqueId", uniqueId);
+    dispatch(deleteContacts(uniqueId));
+    }
+
+  const filterContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+    return items.filter(contact=>
+       contact.name.toLowerCase().includes(normalizedFilter))
+  }
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
+    <Container>
+        <WrapperForPhonebook>
+          {/* Передаем в пропс метод который получит 
+          данные из формы */}
+        <Form submitData={getFormData} /> 
+        {isLoading === STATUS.loading || isLoading === STATUS.idle ? <ProgressBar
+  height="80"
+  width="80"
+  ariaLabel="progress-bar-loading"
+  wrapperClass="progress-bar-wrapper"
+  borderColor = '#F4442E'
+  barColor = '#51E5FF'
+/> :""}
+        
+        {items.length === 0 ? '' :
+          <>
+        <Filter />
+        <Contacts contacts={filterContacts()}
+            deleteContact={deleteContact} />
+          </> }
+        </WrapperForPhonebook>
+    </Container>
+  )
 };
