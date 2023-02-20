@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { STATUS } from 'components/Status/costants.status';
-import { initialStateContacts } from './init.state';
 import { getContacts, addContacts, deleteContacts } from './operations';
+
+export const initialStateContacts = {
+  items: [],
+  isLoading: STATUS.idle,
+  error: null,
+};
 
 const loading = state => {
   state.isLoading = STATUS.loading;
@@ -18,6 +23,7 @@ const contactsSlice = createSlice({
     builder
       .addCase(getContacts.pending, loading)
       .addCase(getContacts.fulfilled, (state, { payload }) => {
+        console.log('🚀  payload', payload);
         state.isLoading = STATUS.success;
         state.items = payload;
       })
@@ -28,7 +34,7 @@ const contactsSlice = createSlice({
         state.items = [...state.items, payload];
       })
       .addCase(addContacts.rejected, error)
-      .addCase(deleteContacts.pending, loading)
+      // .addCase(deleteContacts.pending, loading)
       .addCase(deleteContacts.fulfilled, (state, { payload }) => {
         state.isLoading = STATUS.success;
         const removeContact = state.items.findIndex(
@@ -41,22 +47,3 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-
-// Скоро не будет работать этот метод
-// const contactsSlice = createSlice({
-//   name: 'contacts',
-//   initialState: initialStateContacts,
-//   reducers: {},
-//   extraReducers: {
-//     [getContacts.pending]: state => {
-//       state.isLoading = STATUS.loading;
-//     },
-//     [getContacts.fulfilled]: (state, { payload }) => {
-//       state.isLoading = STATUS.success;
-//       state.items = payload;
-//     },
-//     [getContacts.rejected]: state => {
-//       state.error = STATUS.error;
-//     },
-//   },
-// });

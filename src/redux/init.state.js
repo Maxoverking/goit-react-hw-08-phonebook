@@ -1,14 +1,9 @@
-import { STATUS } from 'components/Status/costants.status';
-// import initState from '../contactsData/contacts.json';
-
-export const initialStateContacts = {
-  items: [],
-  isLoading: STATUS.idle,
-  error: null,
-};
-export const filterInitialState = '';
+import { authInitialState } from './AuthOperation/auth.slice';
+import { initialStateContacts } from './contacts.slice';
+import { filterInitialState } from './filter.slice';
 
 export const initialState = {
   contacts: initialStateContacts,
   filter: filterInitialState,
+  auth: authInitialState,
 };

@@ -1,13 +1,31 @@
 import { LI, H2, UL } from "./Contacts.styled"
-import PropTypes from 'prop-types';
+import { deleteContacts } from "redux/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewContacts, getFilteredContacts } from "redux/selectors";
+//Coздаем функцию фильтрации за компонентом
+//исключаем рендер
+  const filterContacts = (items, filter) => {
+    const normalizedFilter = filter.toLowerCase();
+    return items.filter(contact=>
+       contact.name.toLowerCase().includes(normalizedFilter))
+  }
 
-export default function Contacts ({ contacts, deleteContact }){
+export default function Contacts() {
+    const items = useSelector(addNewContacts);
+    const filter = useSelector(getFilteredContacts);
+    const filteredItems = filterContacts(items, filter);
+
+    const dispatch = useDispatch();
+        const deleteContact = uniqueId => {
+    // console.log("🚀  uniqueId", uniqueId);
+        dispatch(deleteContacts(uniqueId));
+    }
     return (
         <>
             <H2>Contacts</H2>
             <UL>
-            {contacts.map(({id,name,phone}) => (
-                <LI key={id}>{name} : {phone}
+            {filteredItems.map(({id,name,number}) => (
+                <LI key={id}>{name} : {number}
                     <div>
                         <button 
                             type="button"
@@ -15,14 +33,9 @@ export default function Contacts ({ contacts, deleteContact }){
                             //передача id в метод для удаления обьекта
                         >DELETE</button> 
                     </div>
-                     
                 </LI>    
             ))}
             </UL>
         </>
     )
-}
-Contacts.propTypes = {
-    contacts: PropTypes.array.isRequired,
-    deleteContact: PropTypes.func.isRequired,
 }

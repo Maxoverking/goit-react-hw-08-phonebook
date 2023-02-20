@@ -1,77 +1,57 @@
-// import { addNewContactsAction,deleteContactsAction } from "./redux/slice";
-import { Container } from "./App.styled";
-import { ProgressBar } from 'react-loader-spinner';
-import { STATUS } from "./Status/costants.status";
-import  Form  from "./Form";
-import  Contacts  from "./Contacts";
-import Filter from "./Filter";
-import WrapperForPhonebook  from "./Wrapper";
+import {Nav } from "./App.styled";
+// import { STATUS } from "./Status/costants.status";
+import {Routes,Route} from 'react-router-dom';
 import { useEffect } from "react";
 import { useDispatch,useSelector } from 'react-redux';
-import { addNewContacts, getFilteredContacts, isLoadingContacts } from "../redux/selectors";
-import { getContacts,addContacts,deleteContacts } from "../redux/operations";
+import { addNewContacts} from "../redux/selectors";
+import { refreshUser } from 'redux/AuthOperation/authOperation';
+import Navigation from './Navigation/Navigation';
+import UserRegister from './UserCreate/UserRegister/UserRegister';
+import UserLogin from './UserCreate/UserLogin/UserLogin';
+import UserContactsForm from "./UserCreate/UserContacts/UserContactsForm";
+import PrivatRoutes from "./UserCreate/PrivatRoutes";
+import PublicRoutes from "./UserCreate/PublicRoutes";
+import { HomePage } from "./Pages/HomePage";
 
 
 export const App = () => {
   const dispatch = useDispatch();
   const items = useSelector(addNewContacts);
-  const isLoading = useSelector(isLoadingContacts);
-  const filter = useSelector(getFilteredContacts);
+
+  console.log("🚀  items", items);
+
 
   useEffect(() => {
-    dispatch(getContacts())
-  },[dispatch])
+    dispatch(refreshUser());
+  }, [dispatch]);
+  
+  return (<>
+    <Nav>
+      <Navigation />
+    </Nav>
+    <Routes>
+      {/* <Route path='/register' element={<UserRegister/>}/> */}
+      {/* <Route path='/login' element={<UserLogin/>} /> */}
+      {/* <Route path='/contacts' element={<UserContactsForm />} /> */}
 
-  const getFormData = newContact => {
-  if (items.length === 0) {
-    dispatch(addContacts(newContact));
-    return;
-    } else {
-      const existingContacts = 
-      items.findIndex(itemContacts =>
-        newContact.name === itemContacts.name) !==-1;
-        // Проверка если контакт уже есть
-        // console.log("🚀  existingContacts", existingContacts);
-    if(existingContacts){
-      alert(`${newContact.name} is already in contacts.`)
-      return;
-    }
-    dispatch(addContacts(newContact));
-    }
-  }
-  const deleteContact = uniqueId => {
-    // console.log("🚀  uniqueId", uniqueId);
-    dispatch(deleteContacts(uniqueId));
-    }
+      
+      <Route index  element={<HomePage />} />
+      <Route path='/register' element={<PublicRoutes 
+        redirectTo="/contacts" component={<UserRegister />} />} />
+      
+      <Route path='/login' element={<PublicRoutes 
+      redirectTo="/contacts" component={<UserLogin/>}/> } />
 
-  const filterContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return items.filter(contact=>
-       contact.name.toLowerCase().includes(normalizedFilter))
-  }
+      <Route path='/contacts'
+        element={<PrivatRoutes redirectTo="/login"
+        component={<UserContactsForm />}/>}
+      />
 
-  return (
-    <Container>
-        <WrapperForPhonebook>
-          {/* Передаем в пропс метод который получит 
-          данные из формы */}
-        <Form submitData={getFormData} /> 
-        {isLoading === STATUS.loading || isLoading === STATUS.idle ? <ProgressBar
-  height="80"
-  width="80"
-  ariaLabel="progress-bar-loading"
-  wrapperClass="progress-bar-wrapper"
-  borderColor = '#F4442E'
-  barColor = '#51E5FF'
-/> :""}
-        
-        {items.length === 0 ? '' :
-          <>
-        <Filter />
-        <Contacts contacts={filterContacts()}
-            deleteContact={deleteContact} />
-          </> }
-        </WrapperForPhonebook>
-    </Container>
+
+      {/* <PrivatRoutes path='/contacts'>
+        <UserContactsForm />
+      </PrivatRoutes> */}
+    </Routes>
+    </>
   )
 };

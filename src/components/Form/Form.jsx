@@ -1,36 +1,49 @@
 import { FormContainer,Forma,Input,Label } from './Form.styled'
-import { nanoid } from 'nanoid'
 import { useState } from 'react'
+import { addNewContacts } from 'redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContacts } from 'redux/operations';
 
-export default function Form({ submitData }) {
-    const uniqueId = nanoid();
-    const [id, setId] = useState('');
+export default function Form() {
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
+    const [number, setNumber] = useState('');
+    const items = useSelector(addNewContacts);
 
     const inputAddedName = evt => {
         const { name, value } = evt.target;
         if (name === 'name') {
             setName(value);
-            setId(uniqueId);
-        } else if (name === 'phone') {
-            setPhone(value);
+        } else if (name === 'number') {
+            setNumber(value);
         }
     };
 
     const onSubmitForm = evt => {
         evt.preventDefault();
         //Передаем данные в Арр через пропс submitData
-        submitData({
-            name: name,
-            phone: phone,
-            id: id
-        });
-        resetForm();
+        const newContact = {name: name,number: number};
+            if (items.length === 0) {
+                dispatch(addContacts(newContact));
+                resetForm();
+        return;
+        } else {
+        const existingContacts = 
+        items.findIndex(itemContacts =>
+            newContact.name === itemContacts.name) !==-1;
+            // Проверка если контакт уже есть
+            // console.log("🚀  existingContacts", existingContacts);
+        if(existingContacts){
+        alert(`${newContact.name} is already in contacts.`)
+        return;
+        }
+            dispatch(addContacts(newContact));
+            resetForm();
+        }
     };
 
     const resetForm = () => {
-        setId('');setName('');setPhone('');
+        setName('');setNumber('');
     };
 
     return (
@@ -51,10 +64,10 @@ export default function Form({ submitData }) {
                 <Input
                     autoComplete="off"
                     type="tel"
-                    name="phone"
+                    name="number"
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="May contain only number"
-                    value={phone}
+                    value={number}
                     onChange={inputAddedName}
                     required />
 

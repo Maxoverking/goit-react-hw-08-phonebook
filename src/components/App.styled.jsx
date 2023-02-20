@@ -8,3 +8,8 @@ export const Container = styled.div`
     color: black;
     font-size: 30px;
 `
+export const Nav = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
