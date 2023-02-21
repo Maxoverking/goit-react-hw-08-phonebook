@@ -6,7 +6,7 @@ export const authInitialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
-  isLogIn: null,
+  // isLogIn: null,
 };
 
 // const loading = state => {
@@ -34,9 +34,6 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.isLoggedIn = true;
         state.isLogIn = true;
-      })
-      .addCase(logInUser.rejected, state => {
-        state.isLogIn = false;
       })
       .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };

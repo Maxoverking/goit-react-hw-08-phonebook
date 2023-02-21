@@ -8,18 +8,16 @@ export const getContacts = createAsyncThunk('fetchAll', async (_, thunkAPI) => {
   try {
     const { data } = await axios.get('/contacts');
     // console.log('🚀  data:', data);
-    if (data.length >= 0) {
-      toast.success('Welcome !', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-    }
+    toast.success('Welcome !', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error);

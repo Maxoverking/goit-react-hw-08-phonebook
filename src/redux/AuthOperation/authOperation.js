@@ -69,7 +69,7 @@ export const refreshUser = createAsyncThunk(
     try {
       const { data } = await axios.get('/users/current');
 
-      console.log('🚀  data', data);
+      // console.log('🚀  data', data);
       return data;
     } catch (error) {
       return error;
