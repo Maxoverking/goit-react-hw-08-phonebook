@@ -4,10 +4,10 @@ import Filter from "components/Filter";
 import Form from "components/Form";
 import WrapperForPhonebook from "components/Wrapper/Wrapper";
 import { STATUS } from "../../Status/costants.status";
-import { addNewContacts, isLoadingContacts } from 'redux/selectors';
+import { addNewContacts, isLoadingContacts } from 'redux/Operation/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from "components/Loader/Loader";
-import { getContacts } from "redux/operations";
+import { getContacts } from "redux/Operation/operations";
 import { useEffect } from "react";
 
 const UserContactsForm = () => {

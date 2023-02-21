@@ -1,7 +1,7 @@
 import { initialState } from './init.state';
 import { configureStore } from '@reduxjs/toolkit';
-import { contactsReducer } from './contacts.slice';
-import { filterReducer } from './filter.slice';
+import { contactsReducer } from './Operation/contacts.slice';
+import { filterReducer } from './Operation/filter.slice';
 import { authReducer } from './AuthOperation/auth.slice';
 import {
   persistStore,
@@ -24,7 +24,7 @@ const authPersistConfig = {
 
 export const store = configureStore({
   preloadedState: initialState,
-  devTools: true,
+  // devTools: true,
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     contacts: contactsReducer,
@@ -36,6 +36,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

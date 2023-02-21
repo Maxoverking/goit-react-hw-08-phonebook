@@ -1,8 +1,8 @@
 import { FormContainer,Forma,Input,Label } from './Form.styled'
 import { useState } from 'react'
-import { addNewContacts } from 'redux/selectors';
+import { addNewContacts } from 'redux/Operation/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts } from 'redux/operations';
+import { addContacts } from 'redux/Operation/operations';
 
 export default function Form() {
     const dispatch = useDispatch();

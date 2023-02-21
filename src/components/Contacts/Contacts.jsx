@@ -1,7 +1,7 @@
 import { LI, H2, UL } from "./Contacts.styled"
-import { deleteContacts } from "redux/operations";
+import { deleteContacts } from "redux/Operation/operations";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewContacts, getFilteredContacts } from "redux/selectors";
+import { addNewContacts, getFilteredContacts } from "redux/Operation/selectors";
 //Coздаем функцию фильтрации за компонентом
 //исключаем рендер
   const filterContacts = (items, filter) => {

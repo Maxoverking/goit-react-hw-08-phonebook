@@ -1,8 +1,8 @@
 import { Label } from "components/Form/Form.styled"
 import { Input } from "./Filter.styled"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilteredContacts } from "../../redux/selectors";
-import { filterContactsAction } from "../../redux/filter.slice";
+import { getFilteredContacts } from "../../redux/Operation/selectors";
+import { filterContactsAction } from "../../redux/Operation/filter.slice";
 
 export default function Filter() {
     const dispatch = useDispatch();

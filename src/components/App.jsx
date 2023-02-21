@@ -20,7 +20,7 @@ const Navigation = lazy(()=>import ('./Navigation/Navigation'));
 const UserRegister = lazy(()=>import  ( './UserCreate/UserRegister/UserRegister'));
 const UserLogin = lazy(()=>import  ( './UserCreate/UserLogin/UserLogin'));
 const UserContactsForm = lazy(()=>import  ( './UserCreate/UserContacts/UserContactsForm'));
-const HomePage = lazy(() => import('./Pages/HomePage'));
+const HomePage = lazy(() => import('./HomePage/HomePage'));
 
 
 
@@ -37,7 +37,6 @@ export const App = () => {
     <Nav>
       <Navigation />
     </Nav>
-    
     <Routes>
       <Route index  element={<HomePage />} />
       <Route path='/register' element={<PublicRoutes 
