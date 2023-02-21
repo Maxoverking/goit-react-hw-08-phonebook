@@ -18,6 +18,4 @@ export const HomePage = () => {
         </Div>
     )
 }
-// "react-scripts": "5.0.1",
-    // "react": "^18.1.0",
-    // "react-dom": "^18.1.0",
+    // "@material-ui/core": "^4.12.4",

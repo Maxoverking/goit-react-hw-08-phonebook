@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { logInUser } from 'redux/AuthOperation/authOperation';
-import { DIV,WRAP,SPAN } from '../UserRegister/UserRegister.styled';
+import { DIV,WRAP,SPAN,Button } from '../UserRegister/UserRegister.styled';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 
 
@@ -62,9 +62,10 @@ const UserLogin = () => {
             margin="dense"
           />
           <SPAN>
-            <Button color="primary" variant="contained" width={100} type="submit">
+            {/* <Button color="primary" variant="contained" width={100} type="submit">
               Submit
-            </Button>
+            </Button> */}
+            <Button type="submit">Submit</Button>
           </SPAN>
         </form>
       </DIV>

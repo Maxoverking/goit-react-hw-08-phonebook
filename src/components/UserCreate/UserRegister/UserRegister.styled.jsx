@@ -13,10 +13,21 @@ export const DIV = styled.div`
     border-radius: 4px;
     padding: 16px;
     box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.75);
+
  
 `
 export const SPAN = styled.span`
 display: flex;
 justify-content: center;
 margin:10px 0px;
+`
+export const Button = styled.button`
+font-size:18px;
+font-weight:700;
+padding: 10px 20px;
+color:white;
+background-color:#1a62da;
+border-radius:2px;
+border:none;
+width: 100px;
 `
