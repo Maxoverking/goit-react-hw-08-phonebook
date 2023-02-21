@@ -1,8 +1,9 @@
 import { Nav } from "./App.styled";
 import {Routes,Route} from 'react-router-dom';
 import { lazy, Suspense, useEffect } from "react";
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { refreshUser } from 'redux/AuthOperation/authOperation';
+import { getIsLogInAlready } from "redux/AuthOperation/auth.selector";
 // import PrivatRoutes from "./UserCreate/PrivatRoutes";
 // import PublicRoutes from "./UserCreate/PublicRoutes";
 // import Navigation from './Navigation/Navigation';
@@ -25,12 +26,13 @@ const HomePage = lazy(() => import('./Pages/HomePage'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isLogInAlready = useSelector(getIsLogInAlready);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
   
-  return (<>
+  return (!isLogInAlready && (<>
     <Suspense fallback={null}>
     <Nav>
       <Navigation />
@@ -49,6 +51,6 @@ export const App = () => {
         component={<UserContactsForm />}/>}/>
     </Routes>
     </Suspense>
-    </>
+    </>)
   )
 };

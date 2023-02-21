@@ -3,7 +3,6 @@ import Contacts from "components/Contacts";
 import Filter from "components/Filter";
 import Form from "components/Form";
 import WrapperForPhonebook from "components/Wrapper/Wrapper";
-
 import { STATUS } from "../../Status/costants.status";
 import { addNewContacts, isLoadingContacts } from 'redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +26,6 @@ const UserContactsForm = () => {
           {isLoading === STATUS.loading ||
             isLoading === STATUS.idle ?
             <Loader /> : ""}
-
             {items.length === 0 ? '' :
               <>
             <Filter />

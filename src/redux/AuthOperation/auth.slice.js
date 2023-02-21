@@ -6,7 +6,7 @@ export const authInitialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
-  // isLogIn: null,
+  isLogInAlready: false,
 };
 
 // const loading = state => {
@@ -40,9 +40,13 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
+      .addCase(refreshUser.pending, state => {
+        state.isLogInAlready = true;
+      })
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
         state.user = payload;
         state.isLoggedIn = true;
+        state.isLogInAlready = false;
       });
   },
 });
