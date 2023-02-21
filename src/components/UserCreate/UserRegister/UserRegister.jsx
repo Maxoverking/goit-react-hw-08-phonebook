@@ -27,7 +27,7 @@ const UserRegister = () => {
     },
     validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log("🚀  values", values);
+            // console.log("🚀  values", values);
         dispatch(registredUser(values))
     },
   });

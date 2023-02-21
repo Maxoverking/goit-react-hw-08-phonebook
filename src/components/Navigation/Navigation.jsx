@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import { getIsLoggedIn } from "redux/AuthOperation/auth.selector";
 import { Suspense } from "react";
 import UserMenu from "components/UserCreate/UserMenu/UserMenu";
-
+  import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const Navigation = () => {
     const isLoggedIn = useSelector(getIsLoggedIn);
@@ -21,6 +22,7 @@ const Navigation = () => {
             <Suspense fallback={null}>
                 <Outlet />
             </Suspense>
+            <ToastContainer />
         </>
     )
 }
