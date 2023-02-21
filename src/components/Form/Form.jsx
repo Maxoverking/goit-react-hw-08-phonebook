@@ -21,7 +21,6 @@ export default function Form() {
 
     const onSubmitForm = evt => {
         evt.preventDefault();
-        //Передаем данные в Арр через пропс submitData
         const newContact = {name: name,number: number};
             if (items.length === 0) {
                 dispatch(addContacts(newContact));

@@ -13,17 +13,17 @@ export default function Filter() {
   }
     return (
         <>
-            <Label>Find contacts by name</Label>
-            <Input
-                autoComplete="off"
-                type="text"
-                name="name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -]
-                [a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                title="May contain only letters"
-                value={filter}
-                onChange={chooseFilterContact}
-                required />
+        <Label>Find contacts by name</Label>
+        <Input
+            autoComplete="off"
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -]
+            [a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="May contain only letters"
+            value={filter}
+            onChange={chooseFilterContact}
+            required />
         </>
     )
 }

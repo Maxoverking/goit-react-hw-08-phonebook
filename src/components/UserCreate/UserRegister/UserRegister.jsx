@@ -1,13 +1,8 @@
-// import LoadingButton from '@mui/lab/LoadingButton';
-// import { useState } from 'react';
-// import TextField from '@material-ui/core/TextField';
 import { registredUser } from 'redux/AuthOperation/authOperation';
 import { DIV,WRAP,SPAN,Button } from './UserRegister.styled';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-// import Button from '@material-ui/core/Button';
-// import Button from '@mui/material-next/Button';
 import TextField from '@mui/material/TextField';
 
 
@@ -77,10 +72,6 @@ const UserRegister = () => {
                     margin="dense"
                         />
             <SPAN>
-                {/* <Button color="primary" variant="contained" width={100} type="submit">
-                        Submit
-                        </Button> */}
-                        {/* <Button size="small" variant="filled" type="submit"/> */}
                 <Button type="submit">Submit</Button>
             </SPAN>
         </form>

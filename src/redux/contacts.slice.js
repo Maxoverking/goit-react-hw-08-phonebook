@@ -23,7 +23,6 @@ const contactsSlice = createSlice({
     builder
       .addCase(getContacts.pending, loading)
       .addCase(getContacts.fulfilled, (state, { payload }) => {
-        console.log('🚀  payload', payload);
         state.isLoading = STATUS.success;
         state.items = payload;
       })

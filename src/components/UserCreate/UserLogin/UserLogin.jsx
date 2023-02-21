@@ -3,7 +3,6 @@ import { logInUser } from 'redux/AuthOperation/authOperation';
 import { DIV,WRAP,SPAN,Button } from '../UserRegister/UserRegister.styled';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-// import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 
 
@@ -27,9 +26,7 @@ const UserLogin = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("🚀  values", values);
       dispatch(logInUser(values))
-      //   alert(JSON.stringify(values, null, 2));
     },
   });
   return (
@@ -62,9 +59,6 @@ const UserLogin = () => {
             margin="dense"
           />
           <SPAN>
-            {/* <Button color="primary" variant="contained" width={100} type="submit">
-              Submit
-            </Button> */}
             <Button type="submit">Submit</Button>
           </SPAN>
         </form>

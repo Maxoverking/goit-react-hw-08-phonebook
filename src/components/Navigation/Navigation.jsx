@@ -1,5 +1,5 @@
 import { HERDER } from "./Navigation.styled";
-import{NavLinkHeader} from './Navigation.styled'
+import { NavLinkHeader } from './Navigation.styled';
 import { Outlet } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { getIsLoggedIn } from "redux/AuthOperation/auth.selector";
@@ -11,15 +11,13 @@ const Navigation = () => {
     const isLoggedIn = useSelector(getIsLoggedIn);
     return (
         <>
-            <HERDER>
-                {isLoggedIn ?
-                    <UserMenu/>
-                    :
+        <HERDER>
+                {isLoggedIn ?<UserMenu/>:
             <>
             <NavLinkHeader to="/register">Register</NavLinkHeader>
             <NavLinkHeader to="/login">Login</NavLinkHeader>
             </>}
-            </HERDER>
+        </HERDER>
             <Suspense fallback={null}>
                 <Outlet />
             </Suspense>
