@@ -31,7 +31,7 @@ export const App = () => {
   }, [dispatch]);
   
   return (<>
-    <Suspense fallback={<></>}>
+    <Suspense fallback={null}>
     <Nav>
       <Navigation />
     </Nav>
