@@ -26,9 +26,12 @@ const UserLogin = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      console.log("🚀  values:", values);
+      
       dispatch(logInUser(values))
     },
   });
+
   return (
     <WRAP>
       <DIV>
